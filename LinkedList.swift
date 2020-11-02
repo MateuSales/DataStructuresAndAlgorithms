@@ -45,6 +45,24 @@ struct LinkedList<Value> {
         
         return head?.value
     }
+
+    mutating func removeLast() -> Value? {
+        guard let head = head else { return nil }
+        
+        guard head.next != nil else { return pop() }
+        
+        var prev = head
+        var current = head
+        
+        while let next = current.next {
+            prev = current
+            current = next
+        }
+        
+        prev.next = nil
+        tail = prev
+        return current.value
+    }
     
     mutating func append(_ value :Value) {
         
